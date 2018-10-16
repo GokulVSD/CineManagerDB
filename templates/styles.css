@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'productreg';
+    src: url('productreg.ttf');
+}
+@font-face {
+    font-family: 'productbold';
+    src: url('productbold.ttf');
+}
+body{
+	font-family: 'productreg';
+}
+.container-fluid{
+	margin-top: -110px;
+	padding-left: 0;
+	padding-right: 0;
+}
+.jumbotron.login-header{
+	background: #fbc02d;
+	text-align: center;
+	border-radius: 33%;
+	padding-top: 150px;
+	padding-bottom: 50px;
+	z-index: 700;
+	position: relative;
+	box-shadow: 0 10px 30px rgba(17, 17, 17, 0.10), 0 6px 12px rgba(17, 17, 17, 0.10);
+}
+.login-header h1{
+	color: #FFFFFF;
+	font-family: 'productbold';
+	font-size: 75px;
+	display: inline;
+	vertical-align: middle;
+}
+.login-header i{
+	color: #FF3D00;
+	font-size: 100px;
+	display: inline;
+	vertical-align: middle;
+	margin-right: 2%;
+}
+.login-header h4{
+	font-family: 'productreg';
+	margin-top: 15px;
+	color: #FFFFFF;
+	font-size: 20px;
+}
+.jumbotron.login-module{
+	margin-top: -150px;
+	z-index: 500;
+	margin-left: 420px;
+	margin-right: 420px;
+	padding-top: 180px; 
+	padding-bottom: 100px;
+	border-radius: 100px;
+	text-align: center;
+	background-color: #FFFFFF;
+	box-shadow: 0 10px 30px rgba(17, 17, 17, 0.10), 0 6px 12px rgba(17, 17, 17, 0.10);
+
+}
+.jumbotron.login-module input{
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	border-radius: 25px;
+	line-height: 50px;
+	border: 1px solid #fbc02d;
+	text-align: inherit;
+	font-size: 20px;
+	outline: none;
+}
+.jumbotron.login-module button{
+	background: #FF3D00;
+	color: #FFFFFF;
+	font-size: 20px;
+	border-radius: 20px;
+	border: none;
+	outline: none;
+}
