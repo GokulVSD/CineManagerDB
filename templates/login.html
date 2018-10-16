@@ -2,10 +2,10 @@
 <html>
 <head>
 	<title>CineManager Login</title>
-	<link rel="icon" href="./favicon-film.ico">
-	<link href="./bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" href="{{ url_for('static', filename='favicon-film.ico') }}">
+	<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="./styles.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 	<div class="container-fluid">
@@ -20,7 +20,7 @@
 			<button type="button" class="btn btn-warning">Login</button>
 		</div>
 	</div>
-	<script src="./jquery.min.js"></script>
-	<script type="text/javascript" src="{{url_for('static',filename='main.js')}}"></script>
+	<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename='main.js') }}"></script>
 </body>
 </html>
