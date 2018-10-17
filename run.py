@@ -1,13 +1,27 @@
 import mysql.connector,sys
 from mysql.connector import Error
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, session
 
 app = Flask(__name__)
 
-@app.route("/")
-def loginPage():
-    return render_template("login.html")
+@app.route('/')
+def renderLoginPage():
+    return render_template('login.html')
 
+@app.route('/login', methods = ['POST'])
+def verifyAndRenderRespective():
+	username = request.form['username']
+	password = request.form['password']
+
+	try:
+		if username == 'booker' and password == 'placeholder':
+			return render_template('booker.html')
+		elif username == 'manager' and password == 'placeholder':
+			return render_template('manager.html')
+		else:
+			return render_template('loginfail.html')
+	except:
+		return render_template('loginfail.html')
 
 # @app.route("/insert", methods = ['POST'])
 # def insert():

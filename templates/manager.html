@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CineManager Login</title>
+	<link rel="icon" href="{{ url_for('static', filename='favicon-film.ico') }}">
+	<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron login-header">
+			<i class="fas fa-film"></i>
+			<h1>CineManager</h1>
+			<h4>A comprehensive theatre management and ticket booking system</h4>
+		</div>
+		<div class="jumbotron login-module">
+			Logged in as manager
+			<a href="/">logout</a>
+		</div>
+	</div>
+	<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+	<!-- <script type="text/javascript" src="{{ url_for('static',filename='login.js') }}"></script> -->
+</body>
+</html>
