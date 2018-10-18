@@ -62,7 +62,8 @@ function login(){
 		url: '/login',
 		data: form,
 		success: function(response){
-			$('html').html(response);
+			$('#dynamic').html(response);
+			$('.login-header').toggleClass('after-login');
 		}
 	});
 }

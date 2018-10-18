@@ -14,7 +14,7 @@ body{
 	padding-left: 0;
 	padding-right: 0;
 }
-.jumbotron.login-header{
+.login-header{
 	background: #fbc02d;
 	text-align: center;
 	border-radius: 33%;
@@ -23,6 +23,18 @@ body{
 	z-index: 700;
 	position: relative;
 	box-shadow: 0 10px 30px rgba(17, 17, 17, 0.10), 0 6px 12px rgba(17, 17, 17, 0.10);
+	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+}
+.after-login{
+	border-radius: 50px;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding-bottom: 5px;
+	padding-top: 110px;
+}
+.login-header.after-login h4{
+	font-size: 15px;
+	margin-top: 0;
 }
 .login-header h1{
 	color: #FFFFFF;
@@ -43,6 +55,7 @@ body{
 	margin-top: 15px;
 	color: #FFFFFF;
 	font-size: 20px;
+	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .jumbotron.login-module{
 	margin-top: -150px;

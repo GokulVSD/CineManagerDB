@@ -1,6 +1,6 @@
 import mysql.connector,sys
 from mysql.connector import Error
-from flask import Flask, request, jsonify, render_template, session
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
