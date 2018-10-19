@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CineManager Login</title>
+	<title>CineManager</title>
 	<link rel="icon" href="{{ url_for('static', filename='favicon-film.ico') }}">
 	<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
-	<!-- <link rel="stylesheet" type="text/css" href="../static/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-	<!-- <link rel="stylesheet" type="text/css" href="../static/styles.css"> -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lib/themes/default.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lib/themes/default.date.css') }}">
 </head>
 <body>
 	<div class="container-fluid">
@@ -17,16 +17,17 @@
 			<h4>A comprehensive theatre management and ticket booking system</h4>
 		</div>
 		<div id="dynamic">
-			<div class="jumbotron login-module">
+			<div class="jumbotron module">
 				<input type="text" name="username" placeholder="Username">
-				<input type="text" name="password" placeholder="Password">
+				<input type="password" name="password" placeholder="Password">
 				<button type="button" class="btn btn-warning" onclick="login()">Login</button>
 			</div>
 		</div>
 	</div>
 	<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-	<!-- <script type="text/javascript" src="../static/jquery.min.js"></script> -->
+	<script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='lib/picker.js') }}"></script>
+	<script src="{{ url_for('static', filename='lib/picker.date.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static',filename='app.js') }}"></script>
-	<!-- <script type="text/javascript" src="../static/app.js"></script> -->
 </body>
 </html>
