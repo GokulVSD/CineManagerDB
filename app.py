@@ -65,8 +65,31 @@ def getShowID():
 def getSeating():
 	showID = request.form['showID']
 	res = runQuery("SELECT class,no_of_seats FROM shows NATURAL JOIN halls WHERE show_id = "+showID)
-	print(res)
-	return 'ok'
+
+	totalGold = 0
+	totalStandard = 0
+
+	for i in res:
+		if i[0] == 'gold':
+			totalGold = i[1]
+		if i[0] == 'standard':
+			totalStandard = i[1]
+
+	res = runQuery("SELECT seat_no FROM booked_tickets WHERE show_id = "+showID)
+
+	unusedGoldSeats = {*range(1, totalGold + 1)}
+	unusedStandardSeats = {*range(1, totalStandard + 1)}
+
+	for i in res:
+		if i[0] > 1000:
+			unusedGoldSeats = unusedGoldSeats - { i[0] % 1000 }
+		else:
+			unusedStandardSeats = unusedStandardSeats - { i[0] }
+
+	unusedGoldSeats = list(unusedGoldSeats)
+	unusedStandardSeats = list(unusedStandardSeats)
+
+	return render_template('seating.html', unusedGoldSeats = unusedGoldSeats, unusedStandardSeats = unusedStandardSeats)
 
 
 @app.route('/getPrice', methods = ['POST'])

@@ -1,0 +1,9 @@
+<h4>Available Seats</h4>
+<h5>Gold</h5>
+{% for seat in unusedGoldSeats %}
+<button onClick="selectSeat({{ seat }},'gold')">{{ seat }}</button>
+{% endfor %}
+<h5>Standard</h5>
+{% for seat in unusedStandardSeats %}
+<button onClick="selectSeat({{ seat }},'standard')">{{ seat }}</button>
+{% endfor %}
