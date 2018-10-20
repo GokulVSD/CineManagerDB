@@ -45,7 +45,7 @@ function getMoviesShowingOnDate(mdate){
 	$.ajax({
 		type: 'POST',
 		url: '/getMoviesShowingOnDate',
-		data: {'date' : mdate},
+		data: {'date' : date},
 		success: function(response){
 			$('#movies-on-date').html(response);
 		}
@@ -59,7 +59,7 @@ function selectMovie(movID, mtype){
 		type: 'POST',
 		url: '/getTimings',
 		data: {
-			'date' : mdate,
+			'date' : date,
 			'movieID': movieID,
 			'type' : type
 		},
@@ -76,7 +76,7 @@ function selectTiming(mtime){
 		type: 'POST',
 		url: '/getShowID',
 		data: {
-			'date' : mdate,
+			'date' : date,
 			'movieID': movieID,
 			'type' : type,
 			'time' : movieTime

@@ -1,0 +1,4 @@
+<h4>Movies Showing</h4>
+{% for movie in movies %}
+<button onclick="selectMovie({{ movie[0] }}, '{{ movie[2] }}')">{{ movie[1] }} {{ movie[2] }}</button>
+{% endfor %}

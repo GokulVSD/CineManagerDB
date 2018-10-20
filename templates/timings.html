@@ -1,0 +1,4 @@
+<h4>Available Timings</h4>
+{% for time in timings %}
+<button onclick="selectTiming({{ time[0] }})">{{ time[1] }}:{{ time[2] }}</button>
+{% endfor %}
