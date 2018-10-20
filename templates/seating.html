@@ -1,9 +1,9 @@
 <h4>Available Seats</h4>
 <h5>Gold</h5>
-{% for seat in unusedGoldSeats %}
-<button onClick="selectSeat({{ seat }},'gold')">{{ seat }}</button>
+{% for seat in goldSeats %}
+<button onClick="selectSeat({{ seat[0] }},'gold')" {{ seat[1] }}>{{ seat[0] }}</button>
 {% endfor %}
 <h5>Standard</h5>
-{% for seat in unusedStandardSeats %}
-<button onClick="selectSeat({{ seat }},'standard')">{{ seat }}</button>
+{% for seat in standardSeats %}
+<button onClick="selectSeat({{ seat[0] }},'standard')" {{ seat[1] }}>{{ seat[0] }}</button>
 {% endfor %}

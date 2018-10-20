@@ -111,21 +111,23 @@ function selectSeat(no, sclass){
 			'seatClass' : seatClass
 			},
 		success: function(response){
-			$('available-seats button').prop('disabled', true);
 			$('#price-and-confirm').html(response);
 		}
 	});
 }
 
 function confirmBooking(){
+	console.log('HI');
 	$.ajax({
 		type: 'POST',
 		url: '/insertBooking',
 		data: {
 			'showID' : showID,
-			'seatNo' : seatNo
+			'seatNo' : seatNo,
+			'seatClass' : seatClass
 			},
 		success: function(response){
+			$('#available-seats button').prop('disabled', true);
 			$('#price-and-confirm').html(response);
 		}
 	});
