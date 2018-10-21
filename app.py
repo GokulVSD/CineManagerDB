@@ -26,6 +26,7 @@ def verifyAndRenderRespective():
 		return render_template('loginfail.html')
 
 
+# Routes for cashier
 @app.route('/getMoviesShowingOnDate', methods = ['POST'])
 def moviesOnDate():
 	date = request.form['date']
@@ -133,8 +134,28 @@ def createBooking():
 	
 	res = runQuery("INSERT INTO booked_tickets VALUES("+str(ticketNo)+","+showID+","+str(seatNo)+")")
 
-	return '<h5>Ticket Successfully Booked</h5>\
-	<h6>Ticket Number: '+str(ticketNo)+'</h6>'
+	if res == 'No result set to fetch from.':
+		return '<h5>Ticket Successfully Booked</h5>\
+		<h6>Ticket Number: '+str(ticketNo)+'</h6>'
+
+
+# Routes for manager
+@app.route('/getShowsShowingOnDate', methods = ['POST'])
+def getShowsOnDate():
+	date = request.form['date']
+
+	res = runQuery("SELECT show_id,movie_name,type,time FROM shows NATURAL JOIN movies WHERE Date = '"+date+"'")
+	
+	if res == []:
+		return '<h4>No Shows Showing</h4>'
+	else:
+		shows = []
+		for i in res:
+			shows.append([ i[0], i[1], i[2], int(i[3] / 100), i[3] % 100 ])
+
+		return render_template('shows.html', shows = shows)
+
+	return 'ok'
 
 
 def runQuery(query):

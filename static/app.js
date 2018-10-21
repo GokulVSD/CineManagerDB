@@ -25,6 +25,8 @@ function login(){
 			$('#dynamic').html(response);
 			$('.login-header').addClass('after-login');
 			$('.module').addClass('module-after-login');
+
+			// Only for cashier, doesn't do anything when logged in as a manager
 			$('#datepicker-cashier').pickadate({
 				min : new Date(),
 				formatSubmit: 'yyyy/mm/dd',
@@ -39,6 +41,8 @@ function login(){
 		}
 	});
 }
+
+// Functions for cashier
 
 function getMoviesShowingOnDate(mdate){
 	date = mdate;
@@ -129,6 +133,34 @@ function confirmBooking(){
 		success: function(response){
 			$('#available-seats button').prop('disabled', true);
 			$('#price-and-confirm').html(response);
+		}
+	});
+}
+
+// Functions for manager
+function viewBookedTickets(){
+	$('#manager-dynamic-1').html('<input id="datepicker-manager-1" placeholder="Pick a date">');
+
+	$('#datepicker-manager-1').pickadate({
+				formatSubmit: 'yyyy/mm/dd',
+ 				hiddenName: true,
+ 				onSet: function( event ) {
+ 					if ( event.select ) {
+ 						$('#datepicker-manager-1').prop('disabled', true);
+ 						getShowsShowingOnDate(this.get('select', 'yyyy/mm/dd' ));
+ 					}
+ 				}
+	});
+}
+
+function getShowsShowingOnDate(mdate){
+	date = mdate;
+	$.ajax({
+		type: 'POST',
+		url: '/getShowsShowingOnDate',
+		data: {'date' : date},
+		success: function(response){
+			$('#manager-dynamic-2').html(response);
 		}
 	});
 }
