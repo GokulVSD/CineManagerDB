@@ -155,7 +155,55 @@ def getShowsOnDate():
 
 		return render_template('shows.html', shows = shows)
 
-	return 'ok'
+
+@app.route('/getBookedWithShowID', methods = ['POST'])
+def getBookedTickets():
+	showID = request.form['showID']
+
+	res = runQuery("SELECT ticket_no,seat_no FROM booked_tickets WHERE show_id = "+showID+" order by seat_no")
+
+	if res == []:
+		return '<h5>No Bookings</h5>'
+
+	tickets = []
+	for i in res:
+		if i[1] > 1000:
+			tickets.append([i[0], i[1] - 1000, 'Gold'])
+		else:
+			tickets.append([i[0], i[1], 'Standard'])
+
+	return render_template('bookedtickets.html', tickets = tickets)
+
+
+@app.route('/fetchMovieInsertForm', methods = ['GET'])
+def getMovieForm():
+	return render_template('movieform.html')
+
+
+@app.route('/insertMovie', methods = ['POST'])
+def insertMovie():
+	movieName = request.form['movieName']
+	movieLen = request.form['movieLen']
+	movieLang = request.form['movieLang']
+	types = request.form['types']
+	startShowing = request.form['startShowing']
+	endShowing = request.form['endShowing']
+
+	movieID = 0
+	res = None
+
+	while res != []:
+		movieID = randint(0, 2147483646)
+		res = runQuery("SELECT movie_id FROM movies WHERE movie_id = "+str(movieID))
+	
+	res = runQuery("INSERT INTO movies VALUES("+str(movieID)+",'"+movieName+"',"+movieLen+",'"+movieLang+"','"+types+"','"+startShowing+"','"+endShowing+"')")
+
+	if res == 'No result set to fetch from.':
+		return '<h5>Movie Successfully Added</h5>\
+		<h6>Movie ID: '+str(movieID)+'</h6>'
+
+	else:
+		return '<h5>Something Went Wrong</h5>'
 
 
 def runQuery(query):
