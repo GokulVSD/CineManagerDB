@@ -1,4 +1,5 @@
 import mysql.connector,sys
+import datetime
 from mysql.connector import Error
 from flask import Flask, request, jsonify, render_template
 from random import randint
@@ -189,6 +190,13 @@ def insertMovie():
 	startShowing = request.form['startShowing']
 	endShowing = request.form['endShowing']
 
+	res = runQuery('SELECT * FROM movies')
+
+	for i in res:
+		if i[1] == movieName and i[2] == int(movieLen) and i[3] == movieLang and i[4] == types\
+		 and i[5].strftime('%Y/%m/%d') == startShowing and i[6].strftime('%Y/%m/%d') == endShowing:
+			return '<h5>The Exact Same Movie Already Exists</h5>'
+
 	movieID = 0
 	res = None
 
@@ -196,7 +204,8 @@ def insertMovie():
 		movieID = randint(0, 2147483646)
 		res = runQuery("SELECT movie_id FROM movies WHERE movie_id = "+str(movieID))
 	
-	res = runQuery("INSERT INTO movies VALUES("+str(movieID)+",'"+movieName+"',"+movieLen+",'"+movieLang+"','"+types+"','"+startShowing+"','"+endShowing+"')")
+	res = runQuery("INSERT INTO movies VALUES("+str(movieID)+",'"+movieName+"',"+movieLen+\
+		",'"+movieLang+"','"+types+"','"+startShowing+"','"+endShowing+"')")
 
 	if res == 'No result set to fetch from.':
 		return '<h5>Movie Successfully Added</h5>\
