@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lib/themes/default.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lib/themes/default.date.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lib/themes/default.time.css') }}">
 </head>
 <body>
 	<div class="container-fluid">
@@ -16,18 +17,17 @@
 			<h1>CineManager</h1>
 			<h4>A theatre management and ticket booking system</h4>
 		</div>
-		<div id="dynamic">
-			<div class="jumbotron module">
-				<input type="text" name="username" placeholder="Username">
-				<input type="password" name="password" placeholder="Password">
-				<button type="button" class="btn btn-warning" onclick="login()">Login</button>
-			</div>
+		<div class="jumbotron module">
+			<input type="text" name="username" placeholder="Username">
+			<input type="password" name="password" placeholder="Password">
+			<button type="button" class="btn btn-warning" onclick="login()">Login</button>
 		</div>
 	</div>
 	<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='lib/picker.js') }}"></script>
 	<script src="{{ url_for('static', filename='lib/picker.date.js') }}"></script>
+	<script src="{{ url_for('static', filename='lib/picker.time.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static',filename='app.js') }}"></script>
 </body>
 </html>

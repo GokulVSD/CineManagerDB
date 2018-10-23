@@ -215,6 +215,18 @@ def insertMovie():
 		return '<h5>Something Went Wrong</h5>'
 
 
+@app.route('/getValidMovies', methods = ['POST'])
+def validMovies():
+	showDate = request.form['showDate']
+
+	res = runQuery("SELECT movie_id,movie_name,types,length,language FROM movies WHERE show_start <= '"+showDate+\
+		"' and show_end >= '"+showDate+"'")
+
+	if res == []:
+		return '<h5>No Movies Available for Showing On Selected Date</h5>'
+
+	return render_template('validmovies.html', movies = res)
+
 def runQuery(query):
 	try:
 		db = mysql.connector.connect(

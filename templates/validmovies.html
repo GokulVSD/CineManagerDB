@@ -1,0 +1,7 @@
+<h4>Movies Available For Showing</h4>
+{% for movie in movies %}
+<button onclick="selectShowMovie({{ movie[0] }})">
+	<h5>{{ movie[1] }}</h5>
+	<h6>{{ movie[2] }} / {{ movie[3] }} mins / {{ movie[4] }}</h6>
+</button>
+{% endfor %}

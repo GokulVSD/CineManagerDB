@@ -66,6 +66,7 @@ body{
 	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .module{
+	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 	z-index: 500;
 	width: 50%;
 	margin: -150px auto;
