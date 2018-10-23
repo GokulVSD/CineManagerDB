@@ -1,0 +1,4 @@
+<h5>Halls Available On Given Date And Time</h5>
+{% for hall_id in halls %}
+<button onclick="selectShowHall({{ hall_id }})">Hall ID: {{ hall_id }}</button>
+{% endfor %}

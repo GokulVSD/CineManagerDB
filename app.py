@@ -227,6 +227,82 @@ def validMovies():
 
 	return render_template('validmovies.html', movies = res)
 
+
+@app.route('/getHallsAvailable', methods = ['POST'])
+def getHalls():
+	movieID = request.form['movieID']
+	showDate = request.form['showDate']
+	showTime = request.form['showTime']
+
+	res = runQuery("SELECT length FROM movies WHERE movie_id = "+movieID)
+
+	movieLen = res[0][0]
+
+	showTime = int(showTime)
+
+	showTime = int(showTime / 100)*60 + (showTime % 100)
+
+	endTime = showTime + movieLen 
+
+	res = runQuery("SELECT hall_id, length, time FROM shows NATURAL JOIN movies WHERE Date = '"+showDate+"'")
+
+	unavailableHalls = set()
+
+	for i in res:
+
+		x = int(i[2] / 100)*60 + (i[2] % 100)
+
+		y = x + i[1]
+
+		if x >= showTime and x <= endTime:
+			unavailableHalls = unavailableHalls.union({i[0]})
+
+		if y >= showTime and y <= endTime:
+			unavailableHalls = unavailableHalls.union({i[0]})
+
+	res = runQuery("SELECT DISTINCT hall_id FROM halls")
+
+	availableHalls = set()
+
+	for i in res:
+
+		availableHalls = availableHalls.union({i[0]})
+
+	availableHalls = availableHalls.difference(unavailableHalls)
+
+	if availableHalls == set():
+
+		return '<h5>No Halls Available On Given Date And Time</h5>'
+
+	return render_template('availablehalls.html', halls = availableHalls)
+	
+
+@app.route('/insertShow', methods = ['POST'])
+def insertShow():
+	hallID = request.form['hallID']
+	movieID = request.form['movieID']
+	movieType = request.form['movieType']
+	showDate = request.form['showDate']
+	showTime = request.form['showTime']
+
+	showID = 0
+	res = None
+
+	while res != []:
+		showID = randint(0, 2147483646)
+		res = runQuery("SELECT show_id FROM shows WHERE show_id = "+str(showID))
+	
+	res = runQuery("INSERT INTO shows VALUES("+str(showID)+","+movieID+","+hallID+\
+		",'"+movieType+"',"+showTime+",'"+showDate+"',"+'NULL'+")")
+
+	if res == 'No result set to fetch from.':
+		return '<h5>Show Successfully Scheduled</h5>\
+		<h6>Show ID: '+str(showID)+'</h6>'
+
+	else:
+		return '<h5>Something Went Wrong</h5>'
+
+
 def runQuery(query):
 	try:
 		db = mysql.connector.connect(

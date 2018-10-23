@@ -11,7 +11,6 @@ var startShowing = null;
 var endShowing = null;
 var showTime = null;
 var showDate = null;
-
 function login(){
 	if(username === null){
 		username = $("[name='username']")[0].value;
@@ -29,8 +28,6 @@ function login(){
 			$('.module').html(response);
 			$('.module').addClass('module-after-login');
 			$('.login-header').addClass('after-login');
-
-			// Only for cashier, doesn't do anything when logged in as a manager
 			$('#datepicker-cashier').pickadate({
 				min : new Date(),
 				formatSubmit: 'yyyy/mm/dd',
@@ -45,9 +42,7 @@ function login(){
 		}
 	});
 }
-
 // Functions for cashier
-
 function getMoviesShowingOnDate(mdate){
 	date = mdate;
 	$.ajax({
@@ -59,7 +54,6 @@ function getMoviesShowingOnDate(mdate){
 		}
 	});
 }
-
 function selectMovie(movID, mtype){
 	movieID = movID;
 	type = mtype;
@@ -77,7 +71,6 @@ function selectMovie(movID, mtype){
 		}
 	});
 }
-
 function selectTiming(mtime){
 	movieTime = mtime;
 	$.ajax({
@@ -96,7 +89,6 @@ function selectTiming(mtime){
 		}
 	});
 }
-
 function getSeats(){
 	$.ajax({
 		type: 'POST',
@@ -107,7 +99,6 @@ function getSeats(){
 		}
 	});
 }
-
 function selectSeat(no, sclass){
 	seatNo = no;
 	seatClass = sclass;
@@ -123,7 +114,6 @@ function selectSeat(no, sclass){
 		}
 	});
 }
-
 function confirmBooking(){
 	$.ajax({
 		type: 'POST',
@@ -139,12 +129,10 @@ function confirmBooking(){
 		}
 	});
 }
-
 // Functions for manager
 function viewBookedTickets(){
 	$('#options button').prop('disabled', true);
 	$('#manager-dynamic-1').html('<input id="datepicker-manager-1" placeholder="Pick a date">');
-
 	$('#datepicker-manager-1').pickadate({
 				formatSubmit: 'yyyy/mm/dd',
  				hiddenName: true,
@@ -156,7 +144,6 @@ function viewBookedTickets(){
  				}
 	});
 }
-
 function getShowsShowingOnDate(mdate){
 	date = mdate;
 	$.ajax({
@@ -168,7 +155,6 @@ function getShowsShowingOnDate(mdate){
 		}
 	});
 }
-
 function selectShow(mshowID){
 	showID = mshowID;
 	$.ajax({
@@ -181,7 +167,6 @@ function selectShow(mshowID){
 		}
 	});
 }
-
 function insertMovie(){
 	$('#options button').prop('disabled', true);
 	$.ajax({
@@ -189,7 +174,6 @@ function insertMovie(){
 		url: '/fetchMovieInsertForm',
 		success: function(response){
 			$('#manager-dynamic-1').html(response);
-
 			$('#datepicker-manager-2').pickadate({
 				formatSubmit: 'yyyy/mm/dd',
  				hiddenName: true,
@@ -199,7 +183,6 @@ function insertMovie(){
  					}
  				}
 			});
-
 			$('#datepicker-manager-3').pickadate({
 				formatSubmit: 'yyyy/mm/dd',
  				hiddenName: true,
@@ -212,37 +195,25 @@ function insertMovie(){
 		}
 	});
 }
-
 function filledMovieForm(){
 	availTypes = $('[name="movieTypes"]')[0].value.toUpperCase().trim();
 	movieName = $('[name="movieName"]')[0].value;
 	movieLang = $('[name="movieLang"]')[0].value;
 	movieLen = $('[name="movieLen"]')[0].value;
-
 	types = ($('[name="movieTypes"]')[0].value.toUpperCase().trim()).split(' ');
 	atleastTypes = ['2D', '3D', '4DX'];
 	allTypes = [undefined].concat(atleastTypes);
-
 	if($('#datepicker-manager-2')[0].value == '' || $('#datepicker-manager-3')[0].value == '' ||
 	movieName == '' || movieLang == '' || movieLen == '' || $('[name="movieTypes"]')[0].value == '')
-
 		$('#manager-dynamic-2').html('<h5>Please Fill In All Fields</h5>');
-
 	else if(!( atleastTypes.includes(types[0]) && allTypes.includes(types[1]) && allTypes.includes(types[2])) )
-
 		$('#manager-dynamic-2').html('<h5>Invalid Format For Movie Types</h5>');
-
 	else if(! $.isNumeric(movieLen))
-
 		$('#manager-dynamic-2').html('<h5>Movie Length Needs To Be A Number</h5>');
-
 	else if(Date.parse(startShowing) > Date.parse(endShowing))
-
 		$('#manager-dynamic-2').html("<h5>Premiere Date Must Be Before/On Last Date In Theatres</h5>");
-
 	else{
 		movieLen = parseInt(movieLen, 10);
-
 		$.ajax({
 			type: 'POST',
 			url: '/insertMovie',
@@ -260,11 +231,9 @@ function filledMovieForm(){
 		});
 	}
 }
-
 function createShow(){
 	$('#options button').prop('disabled', true);
 	$('#manager-dynamic-1').html('<input id="datepicker-manager-3" placeholder="Pick a date"><input id="timepicker-manager-1" placeholder="Pick a time"><button onclick="getValidMovies()">Submit</button>');
-
 	$('#datepicker-manager-3').pickadate({
 				formatSubmit: 'yyyy/mm/dd',
  				hiddenName: true,
@@ -280,15 +249,14 @@ function createShow(){
  				hiddenName: true,
  				interval: 15,
  				min: new Date(2000,1,1,8),
-  				max: new Date(2000,1,1,21),
+  				max: new Date(2000,1,1,22),
  				onSet: function( event ) {
  					if ( event.select ) {
- 						showTime = this.get('select', 'HHi' );
+ 						showTime = parseInt(this.get('select', 'HHi' ), 10);
  					}
  				}
 	});
 }
-
 function getValidMovies(){
 	if($('#timepicker-manager-1')[0].value == '' || $('#datepicker-manager-3')[0].value == ''){
 		$('#manager-dynamic-2').html('<h5>Please Fill In All Fields</h5>');
@@ -306,6 +274,44 @@ function getValidMovies(){
 			}
 		});
 }
-
-function selectShowMovie()
-
+function selectShowMovie(movID,types){
+	movieID = movID;
+	$('#manager-dynamic-2 button').prop('disabled', true);
+	$('#manager-dynamic-3').html('<h5>Select Movie Type For Show</h5>');
+	types.split(' ').forEach(function(t){
+		$('#manager-dynamic-3').append('<button onclick="selectShowType('+("'"+t+"'")+')">'+t+'</button>');
+	});
+}
+function selectShowType(t){
+	type = t;
+	$.ajax({
+			type: 'POST',
+			url: '/getHallsAvailable',
+			data: {
+				'showDate' : showDate,
+				'showTime' : showTime,
+				'movieID' : movieID
+			},
+			success: function(response){
+				$('#manager-dynamic-3 button').prop('disabled', true);
+				$('#manager-dynamic-4').html(response);
+			}
+		});
+}
+function selectShowHall(hall){
+	$.ajax({
+			type: 'POST',
+			url: '/insertShow',
+			data: {
+				'hallID' : hall,
+				'movieType' : type,
+				'showDate' : showDate,
+				'showTime' : showTime,
+				'movieID' : movieID
+			},
+			success: function(response){
+				$('#manager-dynamic-4 button').prop('disabled', true);
+				$('#manager-dynamic-5').html(response);
+			}
+		});
+}
