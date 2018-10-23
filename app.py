@@ -51,7 +51,7 @@ def timingsForMovie():
 	list = []
 
 	for i in res:
-		list.append( (i[0], int(i[0]/100), i[0]%100) )
+		list.append( (i[0], int(i[0]/100), i[0]%100 if i[0]%100 != 0 else '00' ) )
 
 	return render_template('timings.html',timings = list) 
 
@@ -108,6 +108,9 @@ def getPriceForClass():
 	seatClass = request.form['seatClass']
 
 	res = runQuery("SELECT price FROM shows NATURAL JOIN price_listing WHERE show_id = "+showID)
+
+	if res == []:
+		return '<h5>Prices Have Not Been Assigned To This Show, Try Again Later</h5>'
 
 	price = int(res[0][0])
 	if seatClass == 'gold':
