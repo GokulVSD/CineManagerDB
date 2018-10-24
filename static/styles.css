@@ -123,12 +123,12 @@ button{
 	margin-top:	20px;
 }
 input:disabled{
-	color: #BDBDBD;
-	border: 3px solid #BDBDBD;
+	color: #B0B0B0;
+	border: 3px solid #B0B0B0;
 }
 button:disabled{
-	border: 2px solid #BDBDBD;
-	color: #BDBDBD;
+	border: 2px solid #AAAAAA;
+	color: #707070;
 }
 h4{
 	border-top: 2px solid #FFFFFF;
