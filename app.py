@@ -17,9 +17,9 @@ def verifyAndRenderRespective():
 	password = request.form['password']
 
 	try:
-		if username == 'cashier' and password == 'a':
+		if username == 'cashier' and password == 'cashier':
 			return render_template('cashier.html')
-		elif username == 'manager' and password == 'a':
+		elif username == 'manager' and password == 'manager':
 			return render_template('manager.html')
 		else:
 			return render_template('loginfail.html')
@@ -306,6 +306,33 @@ def insertShow():
 		return '<h5>Something Went Wrong</h5>'
 
 
+@app.route('/getPriceList', methods = ['GET'])
+def priceList():
+	res = runQuery("SELECT * FROM price_listing ORDER BY type")
+
+	sortedDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+
+	res = sorted( res, key = lambda x : sortedDays.index(x[2]) )
+
+	return render_template('currentprices.html', prices = res)
+
+
+@app.route('/setNewPrice', methods = ['POST'])
+def setPrice():
+	priceID = request.form['priceID']
+	newPrice = request.form['newPrice']
+
+	res = runQuery("UPDATE price_listing SET price = "+newPrice+" WHERE price_id = "+priceID)
+
+	if res == 'No result set to fetch from.':
+		return '<h5>Price Successfully Changed</h5>\
+			<h6>Standard: ₹ '+newPrice+'</h6>\
+			<h6>Gold: ₹ '+str( int(int(newPrice) * 1.5) )+'</h6>'
+
+	else:
+		return '<h5>Something Went Wrong</h5>'
+
+
 def runQuery(query):
 	try:
 		db = mysql.connector.connect(
@@ -329,6 +356,7 @@ def runQuery(query):
 
     #Couldn't connect to MySQL
 	return None
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -11,6 +11,7 @@ var startShowing = null;
 var endShowing = null;
 var showTime = null;
 var showDate = null;
+var priceID = null;
 function login(){
 	if(username === null){
 		username = $("[name='username']")[0].value;
@@ -312,6 +313,35 @@ function selectShowHall(hall){
 			success: function(response){
 				$('#manager-dynamic-4 button').prop('disabled', true);
 				$('#manager-dynamic-5').html(response);
+			}
+		});
+}
+function alterPricing(){
+	$('#options button').prop('disabled', true);
+	$.ajax({
+			type: 'GET',
+			url: '/getPriceList',
+			success: function(response){
+				$('#manager-dynamic-1').html(response);
+			}
+		});
+}
+function alterPrice(mpriceID){
+	priceID = mpriceID;
+	$('#manager-dynamic-1 button').prop('disabled', true);
+	$('#manager-dynamic-2').html('<input type="number" name="new_price" placeholder="New price for Standard ₹"><button onclick="changePrice()">Change</button>');
+}
+function changePrice(){
+	newPrice = $('#manager-dynamic-2 input')[0].value;
+	$.ajax({
+			type: 'POST',
+			url: '/setNewPrice',
+			data: {
+				'priceID' : priceID,
+				'newPrice' : newPrice
+			},
+			success: function(response){
+				$('#manager-dynamic-3').html(response);
 			}
 		});
 }

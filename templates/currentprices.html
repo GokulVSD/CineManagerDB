@@ -1,0 +1,8 @@
+<h5>Select Price Listing</h5>
+{% for price in prices %}
+<button onclick="alterPrice({{ price[0] }})">
+	<h5>{{ price[1] }} / {{ price[2] }}</h5>
+	<h6>Standard: ₹ {{ price[3] }}</h6>
+	<h6>Gold: ₹ {{ price[3] * 1.5 }}</h6>
+</button>
+{% endfor %}
