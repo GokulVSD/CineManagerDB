@@ -8,6 +8,8 @@
 }
 body{
 	font-family: 'productreg';
+	color: #FFFFFF;
+	background-color: #212121;
 }
 .container-fluid{
 	margin-top: -110px;
@@ -15,7 +17,7 @@ body{
 	padding-right: 0;
 }
 .login-header{
-	background: #fbc02d;
+	background: #424242;
 	text-align: center;
 	border-radius: 33%;
 	padding-top: 150px;
@@ -51,7 +53,7 @@ body{
 	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .login-header i{
-	color: #ef5350;
+	color: #fbc02d;
 	font-size: 100px;
 	display: inline;
 	vertical-align: middle;
@@ -59,7 +61,6 @@ body{
 	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .login-header h4{
-	font-family: 'productreg';
 	margin-top: 15px;
 	color: #FFFFFF;
 	font-size: 20px;
@@ -74,7 +75,7 @@ body{
 	padding-bottom: 100px;
 	border-radius: 100px;
 	text-align: center;
-	background-color: #FFFFFF;
+	background-color: #2A2A2A;
 	box-shadow: 0 10px 30px rgba(17, 17, 17, 0.10), 0 6px 12px rgba(17, 17, 17, 0.10);
 }
 .module-after-login{
@@ -87,14 +88,20 @@ body{
 	margin-bottom: 25px;
 	border-radius: 25px;
 	line-height: 50px;
-	border: 1px solid #fbc02d;
+	color: #FFFFFF;
+	background-color: #2A2A2A;
+	border: 3px solid #E0E0E0;
 	text-align: inherit;
 	font-size: 20px;
 	outline: none;
 	min-width: 500px;
 }
+::placeholder{
+	color: #BDBDBD;
+}
 .module button.btn{
-	background: #ef5350;
+	font-family: 'productbold';
+	background: #fbc02d;
 	color: #FFFFFF;
 	font-size: 20px;
 	border-radius: 20px;
@@ -102,4 +109,33 @@ body{
 	outline: none;
 	min-width: 250px;
 	min-height: 50px;
+}
+.picker__box{
+	background: #424242;
+	border-radius: 30px;
+}
+.picker__day--disabled, .picker__day--disabled:hover, .picker--focused .picker__day--disabled{
+	background-color: #2A2A2A;
+	border-color: #2A2A2A;
+	color: #B0B0B0;
+}
+.picker__button--today, .picker__button--clear, .picker__button--close{
+	background: #424242;
+	color: #BDBDBD;
+	border-color: #424242; 
+}
+.picker{
+	color: #FFFFFF;
+}
+.picker__day--outfocus{
+	color: #B0B0B0;
+}
+.picker__list-item, .picker--time .picker__box{
+	background: #424242;
+}
+.picker__list{
+	margin-top: 17px;
+}
+.picker__list-item{
+	border-top: none;
 }

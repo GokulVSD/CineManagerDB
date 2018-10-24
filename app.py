@@ -17,9 +17,9 @@ def verifyAndRenderRespective():
 	password = request.form['password']
 
 	try:
-		if username == 'cashier' and password == 'cashier':
+		if username == 'c' and password == 'c':
 			return render_template('cashier.html')
-		elif username == 'manager' and password == 'manager':
+		elif username == 'm' and password == 'm':
 			return render_template('manager.html')
 		else:
 			return render_template('loginfail.html')

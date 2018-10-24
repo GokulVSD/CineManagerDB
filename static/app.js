@@ -278,7 +278,7 @@ function getValidMovies(){
 function selectShowMovie(movID,types){
 	movieID = movID;
 	$('#manager-dynamic-2 button').prop('disabled', true);
-	$('#manager-dynamic-3').html('<h5>Select Movie Type For Show</h5>');
+	$('#manager-dynamic-3').html('<h4>Select Movie Type For Show</h4>');
 	types.split(' ').forEach(function(t){
 		$('#manager-dynamic-3').append('<button onclick="selectShowType('+("'"+t+"'")+')">'+t+'</button>');
 	});
