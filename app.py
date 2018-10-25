@@ -196,8 +196,8 @@ def insertMovie():
 	res = runQuery('SELECT * FROM movies')
 
 	for i in res:
-		if i[1] == movieName and i[2] == int(movieLen) and i[3] == movieLang and i[4] == types\
-		 and i[5].strftime('%Y/%m/%d') == startShowing and i[6].strftime('%Y/%m/%d') == endShowing:
+		if i[1] == movieName and i[2] == int(movieLen) and i[3] == movieLang \
+		 and i[4].strftime('%Y/%m/%d') == startShowing and i[5].strftime('%Y/%m/%d') == endShowing:
 			return '<h5>The Exact Same Movie Already Exists</h5>'
 
 	movieID = 0
@@ -208,27 +208,49 @@ def insertMovie():
 		res = runQuery("SELECT movie_id FROM movies WHERE movie_id = "+str(movieID))
 	
 	res = runQuery("INSERT INTO movies VALUES("+str(movieID)+",'"+movieName+"',"+movieLen+\
-		",'"+movieLang+"','"+types+"','"+startShowing+"','"+endShowing+"')")
+		",'"+movieLang+"','"+startShowing+"','"+endShowing+"')")
 
 	if res == 'No result set to fetch from.':
-		return '<h5>Movie Successfully Added</h5>\
-		<h6>Movie ID: '+str(movieID)+'</h6>'
 
-	else:
-		return '<h5>Something Went Wrong</h5>'
+		subTypes = types.split(' ')
+
+		while len(subTypes) < 3:
+			subTypes.append('NUL')
+
+		res = runQuery("INSERT INTO types VALUES("+str(movieID)+",'"+subTypes[0]+"','"+subTypes[1]+"','"+subTypes[2]+"')")
+
+		if res == 'No result set to fetch from.':
+			return '<h5>Movie Successfully Added</h5>\
+			<h6>Movie ID: '+str(movieID)+'</h6>'
+
+	return '<h5>Something Went Wrong</h5>'
 
 
 @app.route('/getValidMovies', methods = ['POST'])
 def validMovies():
 	showDate = request.form['showDate']
 
-	res = runQuery("SELECT movie_id,movie_name,types,length,language FROM movies WHERE show_start <= '"+showDate+\
+	res = runQuery("SELECT movie_id,movie_name,length,language FROM movies WHERE show_start <= '"+showDate+\
 		"' and show_end >= '"+showDate+"'")
 
 	if res == []:
 		return '<h5>No Movies Available for Showing On Selected Date</h5>'
 
-	return render_template('validmovies.html', movies = res)
+	movies = []
+
+	for i in res:
+		subTypes = runQuery("SELECT * FROM types WHERE movie_id = "+str(i[0]) )
+
+		t = subTypes[0][1]
+
+		if subTypes[0][2] != 'NUL':
+			t = t + ' ' + subTypes[0][2]
+		if subTypes[0][3] != 'NUL':
+			t = t + ' ' + subTypes[0][3]
+
+		movies.append( (i[0],i[1],t,i[2],i[3]) )
+
+	return render_template('validmovies.html', movies = movies)
 
 
 @app.route('/getHallsAvailable', methods = ['POST'])
@@ -297,7 +319,7 @@ def insertShow():
 	
 	res = runQuery("INSERT INTO shows VALUES("+str(showID)+","+movieID+","+hallID+\
 		",'"+movieType+"',"+showTime+",'"+showDate+"',"+'NULL'+")")
-
+	print(res)
 	if res == 'No result set to fetch from.':
 		return '<h5>Show Successfully Scheduled</h5>\
 		<h6>Show ID: '+str(showID)+'</h6>'
@@ -359,5 +381,5 @@ def runQuery(query):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
  
