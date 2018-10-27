@@ -17,10 +17,16 @@ def verifyAndRenderRespective():
 	password = request.form['password']
 
 	try:
-		if username == 'c' and password == 'c':
+		if username == 'cashier' and password == 'cashier':
+
+			res = runQuery('call delete_old()')
 			return render_template('cashier.html')
-		elif username == 'm' and password == 'm':
+
+		elif username == 'manager' and password == 'manager':
+
+			res = runQuery('call delete_old()')
 			return render_template('manager.html')
+
 		else:
 			return render_template('loginfail.html')
 	except:
@@ -106,6 +112,10 @@ def getSeating():
 def getPriceForClass():
 	showID = request.form['showID']
 	seatClass = request.form['seatClass']
+
+	res = runQuery("INSERT INTO halls VALUES(-1,'-1',-1)");
+
+	res = runQuery("DELETE FROM halls WHERE hall_id = -1")
 
 	res = runQuery("SELECT price FROM shows NATURAL JOIN price_listing WHERE show_id = "+showID)
 
@@ -319,7 +329,9 @@ def insertShow():
 	
 	res = runQuery("INSERT INTO shows VALUES("+str(showID)+","+movieID+","+hallID+\
 		",'"+movieType+"',"+showTime+",'"+showDate+"',"+'NULL'+")")
+
 	print(res)
+
 	if res == 'No result set to fetch from.':
 		return '<h5>Show Successfully Scheduled</h5>\
 		<h6>Show ID: '+str(showID)+'</h6>'

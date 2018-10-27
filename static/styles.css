@@ -25,7 +25,7 @@ body{
 	z-index: 700;
 	position: relative;
 	box-shadow: 0 10px 30px rgba(17, 17, 17, 0.10), 0 6px 12px rgba(17, 17, 17, 0.10);
-	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+	transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .after-login{
 	border-radius: 100px;
@@ -50,7 +50,7 @@ body{
 	font-size: 75px;
 	display: inline;
 	vertical-align: middle;
-	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+	transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .login-header i{
 	color: #fbc02d;
@@ -58,15 +58,15 @@ body{
 	display: inline;
 	vertical-align: middle;
 	margin-right: 2%;
-	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+	transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .login-header h4{
 	color: #FFFFFF;
 	font-size: 20px;
-	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+	transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
 .module{
-	transition: all 0.5s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+	transition: all 0.6s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 	z-index: 500;
 	width: 50%;
 	margin: -150px auto 50px;
@@ -114,6 +114,7 @@ button:focus, .module button.btn:focus{
 	outline: 0;
 }
 button{
+	transition: all 0.3s linear;
 	background: #2A2A2A;
 	font-family: 'productreg';
 	border: 2px solid #FFFFFF;
@@ -129,6 +130,9 @@ input:disabled{
 button:disabled{
 	border: 2px solid #AAAAAA;
 	color: #707070;
+}
+button:hover{
+	background: #4A4A4A;
 }
 h4{
 	border-top: 2px solid #FFFFFF;
