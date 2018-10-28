@@ -3,7 +3,7 @@
   CineManagerDB
 </h1>
 
-<h5 align="center">A comprehence theatre management and ticket booking system</h5>
+<h5 align="center">A comprehensive theatre management and ticket booking system</h5>
 <h6 align="center">Written during my 5th semester BE for a course specified mini project in Database Management Systems (DBMS).</h6>
 
 ## 
