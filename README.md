@@ -30,60 +30,55 @@ All HTTP requests to Flask are made via encrypted POST messages. The system is d
 
 <br />
 
-## 
+## Entity Relationship Diagram
+ <a href="https://imgur.com/FqtbNFe"><img src="https://i.imgur.com/FqtbNFe.png" title="source: imgur.com" /></a>
+ 
+<br />
+
+## Database Schema
+ <a href="https://imgur.com/Ldlxg5Y"><img src="https://i.imgur.com/Ldlxg5Y.png" title="source: imgur.com" /></a>
+ 
+<br />
+
+## Functional Dependencies
+ <a href="https://imgur.com/DtWk0Va"><img src="https://i.imgur.com/DtWk0Va.png" title="source: imgur.com" /></a>
+ 
+<br />
+
+##
+
+<a href="https://imgur.com/E76mfpY"><img src="https://i.imgur.com/E76mfpY.png" title="source: imgur.com" /></a>
 
 <br />
 
-<a href="https://imgur.com/chz5FaL"><img src="https://i.imgur.com/chz5FaL.png" title="source: imgur.com" /></a>
-
-<br />
-
-## Use Cases
- * The ordinary Joe, who wants to sleep for as long as possible, and wake up at the latest possible time, yet still reaching work on time.
- * Someone invites you to have dinner with them in a restaurant at 8:30 PM, and you want to be alerted as to when you have to leave your home in order to reach the restaurant at exactly 8:30 PM, taking into account traffic conditions.
- * Many, many more use cases.
-
-<br />
-
-## APIs Used
-<p><strong>Google Maps Distance Matrix API</strong> for predicting departure time</p>
-<p><strong>Google Maps Places API</strong> for picking home and work locations</p>
-<p><strong>Weatherbit.io API</strong> for predicted weather information at the time of departure</p>
-
-
-
-<br />
-
-## Tools Utilised
- <p> <strong>Assets:</strong> Photoshop and Illustrator (for bitmaps)</p>
- <p> <strong>Code:</strong> IntelliJ Idea (and Android Studio for Gradle and Manifest stuff)</p>
- <p> <strong>XML markup:</strong> Sublime 3 (our favourite text editor!)</p>
+## Dependencies
+ <p> <strong>Flask</strong> Python HTTP router</p>
+ <p> <strong>MySQL</strong> Database server</p>
  
  <br />
 
-## InGenius 2017
-  Designed and Written through the course of the 24-hour hackathon held on September 24th, 2017. Including planning and creation of assets, it took us about a week.
+## External Libraries
+ <p> <strong>Bootstrap</strong> CSS structure</p>
+ <p> <strong>JQuery</strong> AJAX requests, and general JS functionality</p>
+ <p> <strong>pickadate.js</strong> Date and time picker</p>
+ <br />
 
-<br />
+## 
 
-## Kalpana 2017
-  Presented during the first ever iteration of PESIT's IEEE charity project exhibition, Kalpana, held on October 28th, 2017. The event had strong emphasis on empowerment of women in engineering, participation required at least one female team member, which this project conveniently had.
+```
+# MySQL server must have an account with username ‘root’ and password ‘root123’ 
+# (changeable within the runQuery function in app.py)
+# This account needs read/write access to all tables in the db_theatre database (or root privileges)
 
-<br />
+# Initialise MySQL:
 
-## Creators
-<p><strong>Gokul Vasudeva</strong>   https://github.com/gokulvsd</p>
-<p><strong>Anusha A</strong>   https://github.com/anushab05</p>
-Coded on a single laptop, hence why the second collaborator doesn't have many commits.
+source /path/to/CineManagerDB/initialise.sql
+
+# Use pip to install mysql-connector and flask, use python 3.6 to run app.py 
+# Visit the website by vising http://localhost:5000 
+
+```
 <br />
 
 ##
-```
-You must use your own API keys, add the Google API key to the manifest, and the wuastaFragment.java 
-by replacing "ADD_YOUR_KEY_HERE", and add the Weatherbit.io API key to the wuastaFragment.java by 
-replacing "ADD_YOUR_WEATHER_KEY_HERE".
-```
-<br />
-
-##
-*The creators give permission to fork the repository and reuse code, but publishing code onto the play store with the core functionality of this app is prohibited, not to mention, thats a pretty douchy thing to do.*
+*Please do not plagiarise.*
