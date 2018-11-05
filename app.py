@@ -165,7 +165,10 @@ def getShowsOnDate():
 	else:
 		shows = []
 		for i in res:
-			shows.append([ i[0], i[1], i[2], int(i[3] / 100), i[3] % 100 ])
+			x = i[3] % 100
+			if i[3] % 100 == 0:
+				x = '00'
+			shows.append([ i[0], i[1], i[2], int(i[3] / 100), x ])
 
 		return render_template('shows.html', shows = shows)
 
