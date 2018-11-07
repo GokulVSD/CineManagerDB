@@ -38,7 +38,7 @@ def verifyAndRenderRespective():
 def moviesOnDate():
 	date = request.form['date']
 
-	res = runQuery("SELECT movie_id,movie_name,type FROM movies NATURAL JOIN shows WHERE Date = '"+date+"'")
+	res = runQuery("SELECT DISTINCT movie_id,movie_name,type FROM movies NATURAL JOIN shows WHERE Date = '"+date+"'")
 
 	if res == []:
 		return '<h4>No Movies Showing</h4>'
