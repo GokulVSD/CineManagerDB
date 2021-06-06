@@ -29,7 +29,8 @@ def verifyAndRenderRespective():
 
 		else:
 			return render_template('loginfail.html')
-	except:
+	except Exception as e:
+		print(e)
 		return render_template('loginfail.html')
 
 
@@ -148,7 +149,7 @@ def createBooking():
 	
 	res = runQuery("INSERT INTO booked_tickets VALUES("+str(ticketNo)+","+showID+","+str(seatNo)+")")
 
-	if res == 'No result set to fetch from.':
+	if res == []:
 		return '<h5>Ticket Successfully Booked</h5>\
 		<h6>Ticket Number: '+str(ticketNo)+'</h6>'
 
@@ -223,8 +224,8 @@ def insertMovie():
 	res = runQuery("INSERT INTO movies VALUES("+str(movieID)+",'"+movieName+"',"+movieLen+\
 		",'"+movieLang+"','"+startShowing+"','"+endShowing+"')")
 
-	if res == 'No result set to fetch from.':
-
+	if res == []:
+		print("Was able to add movie")
 		subTypes = types.split(' ')
 
 		while len(subTypes) < 3:
@@ -232,9 +233,13 @@ def insertMovie():
 
 		res = runQuery("INSERT INTO types VALUES("+str(movieID)+",'"+subTypes[0]+"','"+subTypes[1]+"','"+subTypes[2]+"')")
 
-		if res == 'No result set to fetch from.':
+		if res == []:
 			return '<h5>Movie Successfully Added</h5>\
 			<h6>Movie ID: '+str(movieID)+'</h6>'
+		else:
+			print(res)
+	else:
+		print(res)
 
 	return '<h5>Something Went Wrong</h5>'
 
@@ -335,12 +340,13 @@ def insertShow():
 
 	print(res)
 
-	if res == 'No result set to fetch from.':
+	if res == []:
 		return '<h5>Show Successfully Scheduled</h5>\
 		<h6>Show ID: '+str(showID)+'</h6>'
 
 	else:
-		return '<h5>Something Went Wrong</h5>'
+		print(res)
+	return '<h5>Something Went Wrong</h5>'
 
 
 @app.route('/getPriceList', methods = ['GET'])
@@ -361,13 +367,14 @@ def setPrice():
 
 	res = runQuery("UPDATE price_listing SET price = "+newPrice+" WHERE price_id = "+priceID)
 
-	if res == 'No result set to fetch from.':
+	if res == []:
 		return '<h5>Price Successfully Changed</h5>\
 			<h6>Standard: ₹ '+newPrice+'</h6>\
 			<h6>Gold: ₹ '+str( int(int(newPrice) * 1.5) )+'</h6>'
 
 	else:
-		return '<h5>Something Went Wrong</h5>'
+		print(res)
+	return '<h5>Something Went Wrong</h5>'
 
 
 def runQuery(query):
@@ -379,18 +386,26 @@ def runQuery(query):
 			password='root123')
 
 		if db.is_connected():
+			print("Connected to MySQL, running query: ", query)
 			cursor = db.cursor(buffered = True)
 			cursor.execute(query)
 			db.commit()
-			return cursor.fetchall()
+			res = None
+			try:
+				res = cursor.fetchall()
+			except Exception as e:
+				print("Query returned nothing, ", e)
+				return []
+			return res
 
-	except Error as e:
-		#Some error occured
-		return e.args[1] 
+	except Exception as e:
+		print(e)
+		return e
 
 	finally:
 		db.close()
 
+	print("Couldn't connect to MySQL")
     #Couldn't connect to MySQL
 	return None
 
