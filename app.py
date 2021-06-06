@@ -365,7 +365,7 @@ def setPrice():
 	priceID = request.form['priceID']
 	newPrice = request.form['newPrice']
 
-	res = runQuery("UPDATE price_listing SET price = "+newPrice+" WHERE price_id = "+priceID)
+	res = runQuery("UPDATE price_listing SET price = "+str(newPrice)+" WHERE price_id = "+str(priceID))
 
 	if res == []:
 		return '<h5>Price Successfully Changed</h5>\
