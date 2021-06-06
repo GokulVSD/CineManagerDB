@@ -77,6 +77,11 @@ source /path/to/CineManagerDB/initialise.sql
 # Use pip to install mysql-connector and flask, use python 3.6 to run app.py 
 # Visit the website by vising http://localhost:5000 
 
+Login as "manager" (password "manager"), to add new movies, schedule shows, alter ticket prices, and view bookings.
+Login as "cashier (password "cashier"), to book seats for scheduled shows.
+
+Usernames and passwords can be changed in app.py
+
 ```
 <br />
 
